@@ -1,0 +1,39 @@
+# ============================================================
+# DF-SSM 低光图像增强 - 依赖列表
+# 安装顺序: 先装 PyTorch (按 CUDA 版本), 再 pip install -r requirements.txt
+# ============================================================
+
+# ---------- 核心框架 (必装) ----------
+# PyTorch 需单独按 CUDA 版本安装, 此处不写死版本, 示例:
+#   CUDA 11.8: pip install torch==1.13.1+cu118 torchvision==0.14.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+#   CUDA 12.1: pip install torch==2.1.0+cu121 torchvision==0.16.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+torch>=1.10.0
+torchvision>=0.11.0
+
+# ---------- 张量操作 (必装) ----------
+einops>=0.4.0
+
+# ---------- 图像处理 (必装) ----------
+Pillow>=8.0.0
+numpy>=1.20.0,<2.0.0  # PyTorch 2.1 用 NumPy 1.x 编译, 2.x 会触发 _ARRAY_API 警告
+opencv-python>=4.5.0
+# 无显示设备的服务器可改用 opencv-python-headless 替代 opencv-python
+
+# ---------- 进度条 (必装) ----------
+tqdm>=4.60.0
+
+# ---------- 绘图 (必装, 训练曲线可视化) ----------
+matplotlib>=3.3.0
+
+# ---------- 可选: Mamba CUDA 加速 ----------
+# 不装也能跑 (代码有纯 PyTorch 的 fallback SSM 实现, 见 models/new_modules.py)
+# 安装较复杂, 需匹配 CUDA 版本编译:
+#   pip install causal-conv1d>=1.1.0
+#   pip install mamba-ssm>=1.0.1
+# mamba-ssm>=1.0.1
+# causal-conv1d>=1.1.0
+
+# ---------- 可选: 评估指标 ----------
+# LPIPS 感知指标 (evaluate.py 懒加载, 不装则跳过 LPIPS 计算)
+# lpips>=0.1.4
+# SSIM/PSNR 已用纯 torch 实现, 无需 scikit-image / pytorch-msssim

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+
+# 数据集（请自行下载, 见 README）
+datasets/*
+!datasets/__init__.py
+data/
+
+# 训练产物
+checkpoints/
+logs/
+*.log
+*.pth
+*.bak*
+
+# 结果与绘图产物
+deliverables/
+eval/
+eval_results/
+output/
+output_figure/
